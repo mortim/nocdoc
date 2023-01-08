@@ -33,7 +33,7 @@ def nameFunctions = {
 def html = {
     quote swap quote swap  3-1 rotNM quote 3 1 rotNM cat cat
     
-    "<!DOCTYPE>
+    "<!DOCTYPE html>
 <html>
 <head>
     <meta charset=\"UTF-8\" />
