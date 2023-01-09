@@ -42,7 +42,7 @@ def main = {
     /* A HTML file is generated */
     /* library_info (optional: documented_functions) (optional: html_filename) is_the_homepage generate */
     /* example */
-    libInfo True generate
-    libInfo prelude "random_module" False generate
+    info True generate
+    info functions "random_module" False generate
 }
 ```
