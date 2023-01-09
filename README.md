@@ -9,12 +9,6 @@ or if you want to document your own Noc functions:
 ```scala
 load nocdoc.noc
 
-def functions = {
-    [
-        [randomFunction]
-    ]
-}
-
 def randomFunction = {
     ---
     docstring...
@@ -22,8 +16,33 @@ def randomFunction = {
     some code...
 }
 
+/* Doc generation */
+
+/* documented functions */
+def functions = {
+    [
+        [randomFunction]
+    ]
+}
+
+/* library info */
+/* You have to the keep the same order */
+def info = {
+    [
+        "library_name"
+        "author"
+        "library_description"
+        "git repos url"
+        /* Table of contents */
+        ["page1.html" ... "pageN.html"]
+    ]
+}
+
 def main = {
     /* A HTML file is generated */
-    functions "your_lib_name" generateDoc
+    /* library_info (optional: documented_functions) (optional: html_filename) is_the_homepage generate */
+    /* example */
+    libInfo True generate
+    libInfo prelude "random_module" False generate
 }
 ```
