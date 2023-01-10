@@ -9,7 +9,7 @@ or if you want to document your own Noc functions:
 ```scala
 load nocdoc.noc
 
-def randomFunction = {
+def randomFunction1 = {
     ---
     docstring...
     ---
