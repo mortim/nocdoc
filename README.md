@@ -13,7 +13,7 @@ def randomFunction = {
     ---
     docstring...
     ---
-    some code...
+    /* some code... */
 }
 
 /* Doc generation */
@@ -30,7 +30,7 @@ def moduleFunctions = {
 }
 
 /* library info */
-/* You have to the keep the same order */
+/* IMPORTANT: You have to the keep the same order */
 def info = {
     [
         "library_name"
