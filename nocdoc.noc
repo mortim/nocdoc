@@ -204,12 +204,3 @@ def generateHomePage = {
 
     html write
 }
-
-def generate = {
-    [
-        # Generate a homepage
-        [[True] [generateHomePage]]
-        # Generate a module doc
-        [[False] [generateModule]]
-    ] case
-}
