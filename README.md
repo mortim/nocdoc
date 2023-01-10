@@ -30,7 +30,7 @@ def moduleFunctions = {
 }
 
 /* library info */
-/* IMPORTANT: You have to the keep the same order */
+/* IMPORTANT: You have to keep the same order */
 def info = {
     [
         "library_name"
