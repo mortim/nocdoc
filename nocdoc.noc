@@ -111,13 +111,12 @@ def html = {
 
         #top-btn {
             position: fixed;
-            left: 97%;
-            top: 92%;
+            left: 90%;
+            top: 80%;
             background-color: #008CBA;
             padding: 15px;
             color: #fff;
             text-decoration: none;
-            border-radius: 100%;
         }
 
         h6 {
