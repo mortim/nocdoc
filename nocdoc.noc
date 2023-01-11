@@ -108,7 +108,7 @@ def html = {
             background-color: #efe9e9;
             border-radius: 10px;
         }
-
+        
         #top-btn {
             position: fixed;
             left: 90%;
@@ -117,6 +117,7 @@ def html = {
             padding: 15px;
             color: #fff;
             text-decoration: none;
+            border-radius: 5px;
         }
 
         h6 {
