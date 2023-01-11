@@ -55,27 +55,40 @@ def html = {
 <html>
 <head>
     <meta charset=\"UTF-8\" />
+    <link rel=\"icon\" href=\"https://raw.githubusercontent.com/mortim/vscode-noc/master/assets/icon.png\" />
     <title>Noc documentation</title>
     <link href=\"https://fonts.googleapis.com/css2?family=Ubuntu&display=swap\">
     <style>
-        * {
+         * {
             padding: 0;
             font-family: 'Ubuntu', sans-serif;
             font-weight: 400;
         }
+        
+        
+        body {
+            background-color: ligthgrey;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+        }
 
         li {
             list-style: none;
-            padding-top: 7px;
+            word-break: break-all;
+            margin-top: 13px;
         }
 
         li a {
             text-decoration: none;
-
+            color: rgb(63, 63, 63);
+            padding: 2px;
+            border-radius: 5px;
         }
 
         li a:hover {
-            color: grey;
+            color: rgb(83, 83, 83);
         }
 
         #table-of-contents {
@@ -93,20 +106,26 @@ def html = {
             padding-left: 10px;
             padding-bottom: 15px;
             background-color: #efe9e9;
+            border-radius: 10px;
         }
 
         #top-btn {
             position: fixed;
-            left: 90%;
-            top: 80%;
+            left: 97%;
+            top: 92%;
             background-color: #008CBA;
             padding: 15px;
             color: #fff;
             text-decoration: none;
+            border-radius: 100%;
         }
 
         h6 {
             color: grey;
+        }
+
+        #sidebar {
+            width: 240px;
         }
 
         #sidebar2 {
@@ -114,11 +133,16 @@ def html = {
         }
 
         #sidebar ul {
-            padding: 10px;
+            border-radius: 10px;
+            padding: 0px 20px 20px;
         }
 
         #container {
             display:flex;
+        }
+
+        .section-title {
+            text-align: center;
         }
     </style>
 </head>
