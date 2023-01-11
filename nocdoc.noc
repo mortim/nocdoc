@@ -147,7 +147,7 @@ def html = {
     </style>
 </head>
 <body>
-    <h6 id=\"start-of-page\">Documentation powered by the <a href=\"https://github.com/mortim/noc\">Noc Programming Language</a></h1>
+    <h6 id=\"start-of-page\">Documentation powered by <a href=\"https://github.com/mortim/nocdoc\">nocdoc</a></h1>
     <h2>{} : {}</h2>
     <div>
         <a id=\"top-btn\" href=\"#start-of-page\">Top</a>
