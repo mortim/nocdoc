@@ -34,10 +34,14 @@ def removeFileNameExtension = {
     $ popr pop popr pop popr pop popr pop popr pop tostr
 }
 
-def header = {
+def subHeader = {
     "" [
     dup "<li><a href=\"" swap cat "\">" cat swap removeFileNameExtension cat "</a></li>" cat
     cat] fold
+}
+
+def header = {
+    "" [unquote "<li>" 3 -1 rotNM cat swap subHeader "<ul>" swap cat "</ul></li>" cat cat cat] fold
 }
 
 def html = {
@@ -66,13 +70,26 @@ def html = {
             font-weight: 400;
         }
         
-        
         body {
             background-color: ligthgrey;
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-weight: 600;
+        }
+
+        pre, code {
+            background-color: #E5E5CB;
+            white-space: pre-wrap;
+        }
+
+        blockquote p {
+            color: grey;
+            font-style: italic;
+        }
+
+        table, th, td {
+            border: 1px solid black;
         }
 
         li {
@@ -199,12 +216,11 @@ def html = {
             #sidebar2 li:nth-child(2), #sidebar2 li:nth-child(3), #sidebar2 li:nth-child(4), #sidebar2 li:last-child {
                 display: block;
             }
-
         }
     </style>
 </head>
 <body>
-    <h6 id=\"start-of-page\">Documentation powered by <a href=\"https://github.com/mortim/nocdoc\">nocdoc</a></h1>
+    <h6 id=\"start-of-page\">Documentation powered by <a href=\"https://github.com/noc-lang/nocdoc\">nocdoc</a></h1>
     <h2>{} : {}</h2>
     <div>
         <a id=\"top-btn\" href=\"#start-of-page\">Top</a>
@@ -312,6 +328,23 @@ def generateHomePage = {
 
     # type of page printed in the html
     "library"
+
+    html write
+}
+
+def generateWikiPage = { 
+    dup ".html" cat swap
+    4 2 rotNM
+    
+    swap unquote
+    5 1 rotNM 
+    pop pop pop pop
+
+    header ""
+    3 -1 rotNM
+
+    # type of page printed in the html
+    "wiki"
 
     html write
 }
