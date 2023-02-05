@@ -44,6 +44,10 @@ def header = {
     "" [unquote "<li>" 3 -1 rotNM cat swap subHeader "<ul>" swap cat "</ul></li>" cat cat cat] fold
 }
 
+def detailsSection = {
+    "<h3 class=\"section-title\">Details</h3><li><b>Author:</b> {}</li><li><b>Git repos: </b><a href=\"{}\">{}</a></li>" swap format
+}
+
 def html = {
     5 1 rotNM
 
@@ -305,6 +309,8 @@ def generateModule = {
 }
 
 def generateHomePage = {
+    # filename.html filename "table_of_contents" "details section" "description" "type_page"
+    # "wiki_name.html" "wiki_name" "toc" "details" "wiki_description in HTML..." 
     unquote
 
     header
@@ -317,14 +323,8 @@ def generateHomePage = {
 
     3 -1 rotNM swap
 
-    dup quote swap quote
-    3 -1 rotNM quote 3 1 rotNM 
-
-    cat cat
-
-    "<h3 class=\"section-title\">Details</h3><li><b>Author:</b> {}</li><li><b>Git repos: </b><a href=\"{}\">{}</a></li>" swap
-
-    format swap
+    quote swap quote swap cat
+    detailsSection swap
 
     # type of page printed in the html
     "library"
@@ -337,11 +337,19 @@ def generateWikiPage = {
     4 2 rotNM
     
     swap unquote
-    5 1 rotNM 
-    pop pop pop pop
+    5 -1 rotNM pop
+    3 -1 rotNM pop
+    3 1 rotNM
 
-    header ""
+    quote swap quote swap cat
+
+    detailsSection swap
+
+    header 3 1 rotNM
+
     3 -1 rotNM
+    3 1 rotNM
+    swap
 
     # type of page printed in the html
     "wiki"
