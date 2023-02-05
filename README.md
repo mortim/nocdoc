@@ -2,7 +2,8 @@
 
 A basic documentation generator for the [Noc language programming language](https://github.com/noc-lang/noc) written in Noc.
 
-To build the Noc documentation, check this [link](https://noc-lang.github.io/docs/installation.html#building-the-noc-documentation-only-the-v0100).
+- To check how to build the Noc documentation, [here](https://noc-lang.github.io/docs/installation.html#building-the-noc-documentation-only-the-v0100).
+- To check an example with the official source code of the Noc documentation, [here](https://github.com/noc-lang/docs)
 
 or if you want to document your own Noc functions:
 
