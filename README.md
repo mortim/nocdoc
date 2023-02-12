@@ -7,7 +7,7 @@ A basic documentation generator for the [Noc language programming language](http
 or if you want to document your own Noc functions:
 
 ```scala
-load nocdoc.noc
+load nocdoc/nocdoc.noc
 
 def randomFunction1 = {
     ---

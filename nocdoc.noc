@@ -225,7 +225,7 @@ def renderWikiPage = {
     3 -1 rotNM dup ".html" cat 5 1 rotNM
     
     # "wiki_page_name.html" wikiPage "table_of_contents_html" "sidebar2_html" "library : wiki_page_name" "library : wiki_page_name"
-    "library : " swap cat dup
+    "wiki : " swap cat dup
 
     # "wiki_page_name.html" wikiPage "library : wiki_page_name" "library : wiki_page_name" "table_of_contents_html" "sidebar2_html"
     4 2 rotNM 
