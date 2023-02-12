@@ -1,0 +1,42 @@
+def TABLE_OF_CONTENTS_SIDEBAR = {
+    ---
+    TABLE_OF_CONTENTS_SIDEBAR constant (see <a href="main.html#[formatHTML]">formatHTML</a>)
+    ---
+    0 
+}
+
+def TABLE_OF_CONTENTS_LINKS = { 
+    ---
+    TABLE_OF_CONTENTS_LINKS constant (see <a href="main.html#[formatHTML]">formatHTML</a>)
+    ---
+    1
+}
+
+def DETAILS_SIDEBAR = {
+    ---
+    DETAILS_SIDEBAR constant (see <a href="main.html#[formatHTML]">formatHTML</a>)
+    ---
+    2 
+}
+
+def FUNCTIONS_SIDEBAR = { 
+    ---
+    FUNCTIONS_SIDEBAR constant (see <a href="main.html#[formatHTML]">formatHTML</a>)
+    ---
+    3 
+}
+
+
+def NOC_FUNCTIONS_DOCUMENTATION = { 
+    ---
+    NOC_FUNCTIONS_DOCUMENTATION (see <a href="main.html#[formatHTML]">formatHTML</a>)
+    ---
+    4 
+}
+
+def PAGE = { 
+    ---
+    PAGE constant (see <a href="main.html#[formatHTML]">formatHTML</a>)
+    ---
+    5 
+}

@@ -1,358 +1,268 @@
 load seq
-load fs
 load str
-load sys
-load seq
 load std:fs
 load std:string
 load std:stack
-load std:bool
+load nocdoc/include/utils.noc
+load nocdoc/include/constants.noc
 
-def replaceAllNewLinesByBr = {
-    dup
+def formatHTML = {
+    ---
+    Format some website blocks in HTML
+    
+    Syntax: [const] formatHTML
+    Consts:
+        - TABLE_OF_CONTENTS_SIDEBAR : Render the table of contents in HTML
+        - TABLE_OF_CONTENTS_LINKS: Render the links for the table of contents in HTML
+        - DETAILS_SIDEBAR : Render the details sidebar (author, url_git_repos) in HTML
+        - FUNCTIONS_SIDEBAR: Render the summary of all Noc functions from a module in HTML
+        - NOC_FUNCTIONS_DOCUMENTATION: Render the Noc functions documentation in HTML
+        - PAGE: Render the entire HTML page
+    ---
+
     [
-        [[[]] [pop]]
-        [[_] [
-            popr
-            dup
-            [quote 3 -1 rotNM cat swap replaceAllNewLinesByBr]
-            [pop ['<' 'b' 'r' '>'] 3 -1 rotNM cat swap replaceAllNewLinesByBr]
-            3 -1 rotNM '\n' == if
+        [[TABLE_OF_CONTENTS_SIDEBAR] [
+                    # example => table_of_contents : [["section1" ["link1.html" "link2.html"]] ["section2" ["link3.html" "link4.html"]]]
+                    #   -> first iteration: "acc" ["section1" ["link1.html" "link2.html"]]
+
+                    "" [ # "acc" "section1" ["link1.html" "link2.html"]
+                         unquote
+                         # "acc" "section1" ["table_of_contents_html"]
+                         TABLE_OF_CONTENTS_LINKS formatHTML quote
+                         # "acc" ["section1" "table_of_contents_html"]
+                         quoteTwoElems
+                         # "acc" "<li>section1<ul>table_of_contents_html</ul></li>"
+                         "<li>{}<ul>{}</ul></li>" swap format
+                         # "acc<li>section1<ul>table_of_contents_html</ul></li>"
+                         cat
+                       ] fold
         ]]
+
+        [[TABLE_OF_CONTENTS_LINKS] [
+                # example => links: ["link1.html" "link2.html"]
+                #   -> first iteration: "acc" "link1.html"
+                
+                "" [ # "acc" "link1.html" "link1.html"
+                     dup
+                     # "acc" "link1.html" ["link1"]
+                     $ 5 removeNChars tostr quote
+                     # "acc" ["link.html" "link1"]
+                     quoteTwoElems
+                     # "acc" "<li><a href=\"link.html\">link1</a></li>"
+                     "<li><a href=\"{}\">{}</a></li>" swap format
+                     # "acc<li><a href=\"link1.html\">link1</a></li>"
+                     cat
+                ] fold
+
+        ]]
+
+        [[DETAILS_SIDEBAR] ["<h3 class=\"section-title\">Details</h3><li><b>Author:</b> {}</li><li><b>Git repos: </b><a href=\"{}\">{}</a></li>" swap format]]
+
+        [[NOC_FUNCTIONS_DOCUMENTATION] [
+            # example => functions : [[func_a] [func_b]]
+            #   -> first iteration: "acc" [func_a]
+
+            "" [ # "acc" "[func_a]" "[func_a]" "func_a_doc"
+                dup dup str swap str 3 -1 rotNM help
+                # "acc" "[func_a]" "[func_a]" ["func_a_doc_with_br_tags"]
+                $ [] swap replaceNewlines tostr quote
+                # "acc" ["[func_a]" "[func_a]" "func_a_doc_with_br_tags"]
+                quoteTwoElems quoteTwoElems
+                # "acc" "<div id=\"#[func_a]\"><h3>[func_a]</h3>func_a_doc_with_br_tags</div>"
+                "<div id=\"{}\"><h3>{}</h3>{}</div><br><br>" swap format
+                # "acc<div id=\"#[func_a]\"><h3>[func_a]</h3>func_a_doc_with_br_tags</div>"
+                cat
+            ] fold
+
+        ]]
+
+        [[FUNCTIONS_SIDEBAR] [
+            # example => functions : [[func_a] [func_b]]
+            #   -> first iteration: "acc" [func_a]
+
+            "" [ # "acc" "[func_a]" ["[func_a]"]
+                 str dup quote
+                 # "acc" ["[func_a]" "[func_a]"]
+                 quoteTwoElems
+                 # "acc" "<li><a href=\"#[func_a]\">[func_a]</a></li>"
+                 "<li><a href=\"#{}\">{}</a></li>" swap format
+                 # "acc<li><a href=\"#[func_a]\">[func_a]</a></li>"
+                 cat
+                ] fold 
+        
+            "<h3 class=\"section-title\">Functions</h3>" swap cat
+        
+        ]]
+        
+        [[PAGE] [ # ["page_type" "name_page" "table_of_contents_html" "sidebar2_html" "content"]
+                  quote quoteTwoElems quoteTwoElems quoteTwoElems quoteTwoElems 
+                  # "html_content"
+                  "nocdoc/template.html" read swap format
+        ]]
+
     ] case
 }
 
-def htmlFunctions = {
-    "" [dup dup str swap str 3 -1 rotNM help $ [] swap replaceAllNewLinesByBr tostr "<div id=\"" 3 -1 rotNM cat "\">" cat 3 -1 rotNM "<h3>" swap cat "</h3>" cat cat swap cat "</div><br><br><br>" cat cat] fold
-}
+def renderHomePage = {
+    ---
+    renderHomePage : info => "name.html" "html_content"
+        info -> ["name" "author" "desc" "url_git" table_of_contents]
+    Render the homepage in HTML format string
+    ---
 
-def nameFunctions = {
-    "" [str dup "<li><a href=\"#" swap cat "\">" cat swap cat "</a></li>" cat cat] fold
-}
+    # "name" "author" "desc" "url_git" table_of_contents
+    unquote
 
-def removeFileNameExtension = {
-    $ popr pop popr pop popr pop popr pop popr pop tostr
-}
+    # "name" "author" "desc" "url_git" "table_of_contents_html"
+    TABLE_OF_CONTENTS_SIDEBAR formatHTML
 
-def subHeader = {
-    "" [
-    dup "<li><a href=\"" swap cat "\">" cat swap removeFileNameExtension cat "</a></li>" cat
-    cat] fold
-}
+    # "author" "desc" "url_git" "table_of_contents_html" "name" "name"
+    5 -1 rotNM dup
 
-def header = {
-    "" [unquote "<li>" 3 -1 rotNM cat swap subHeader "<ul>" swap cat "</ul></li>" cat cat cat] fold
-}
+    # "author" "desc" "url_git" "table_of_contents_html" "name.html" "name"
+    ".html" cat swap 
 
-def detailsSection = {
-    "<h3 class=\"section-title\">Details</h3><li><b>Author:</b> {}</li><li><b>Git repos: </b><a href=\"{}\">{}</a></li>" swap format
-}
+    # "name.html" "name" "author" "desc" "url_git" "table_of_contents_html"
+    6 2 rotNM 
 
-def html = {
-    5 1 rotNM
-
-    quote swap quote swap 3 -1 rotNM quote 3 1 rotNM 
-    
-    4 -1 rotNM quote 4 1 rotNM
-
-    5 -1 rotNM quote 5 1 rotNM
-
-    cat cat cat cat
-
-    "<!DOCTYPE html>
-<html>
-<head>
-    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-    <meta charset=\"UTF-8\" />
-    <link rel=\"icon\" href=\"https://raw.githubusercontent.com/mortim/vscode-noc/master/assets/icon.png\" />
-    <title>Noc documentation</title>
-    <link href=\"https://fonts.googleapis.com/css2?family=Ubuntu&display=swap\">
-    <style>
-         * {
-            padding: 0;
-            font-family: 'Ubuntu', sans-serif;
-            font-weight: 400;
-        }
-        
-        body {
-            background-color: ligthgrey;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 600;
-        }
-
-        pre, code {
-            background-color: #E5E5CB;
-            white-space: pre-wrap;
-        }
-
-        blockquote p {
-            color: grey;
-            font-style: italic;
-        }
-
-        table, th, td {
-            border: 1px solid black;
-        }
-
-        li {
-            list-style: none;
-            word-break: break-all;
-            margin-top: 13px;
-        }
-
-        li a {
-            text-decoration: none;
-            color: rgb(63, 63, 63);
-            padding: 2px;
-            border-radius: 5px;
-        }
-
-        li a:hover {
-            color: rgb(83, 83, 83);
-        }
-
-        #table-of-contents {
-            border: 1px solid lightgrey;
-            margin-top: -1px;
-        }
-
-        #docs {
-            padding-left: 20px;
-            width: 100%;
-        }
-
-        #docs div {
-            border: 1px solid lightgrey;
-            padding-left: 10px;
-            padding-bottom: 15px;
-            background-color: #efe9e9;
-            border-radius: 10px;
-        }
-        
-        #top-btn {
-            position: fixed;
-            left: 90%;
-            top: 80%;
-            background-color: #008CBA;
-            padding: 15px;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        h6 {
-            color: grey;
-        }
-
-        #sidebar {
-            width: 240px;
-        }
-
-        #sidebar2 {
-            border: 1px solid lightgrey;
-        }
-
-        #sidebar ul {
-            border-radius: 10px;
-            padding: 0px 20px 20px;
-        }
-
-        #container {
-            display:flex;
-        }
-
-        .section-title {
-            text-align: center;
-        }
-
-        .more-link {
-            background-color: lightblue;
-            padding: 5px;
-            border-radius: 5px;
-            cursor: pointer;
-            display:none;
-        }
-
-        input[type=checkbox] {
-            display:none;
-        }
-
-        @media (max-width: 700px) {
-            #container {
-                display: block;
-            }
-
-            #docs {
-                padding-left: 0px;
-            }
-
-            #docs * {
-                word-break: break-all;
-            }
-
-            #top-btn {
-                left: 80%;
-            }
-
-            .more-link {
-                display:block;
-            }
-
-            #sidebar {
-                width: 100%;
-                text-align: center;
-            }
-
-            #table-of-contents li {
-                display:none;
-            }
-
-            #table-of-contents li:first-child, #table-of-contents li:nth-child(2), #table-of-contents li:nth-child(3), #table-of-contents li:last-child {
-                display: block;
-            }
-
-            #sidebar2 li {
-                display:none;
-            }
-
-            #sidebar2 li:nth-child(2), #sidebar2 li:nth-child(3), #sidebar2 li:nth-child(4), #sidebar2 li:last-child {
-                display: block;
-            }
-        }
-    </style>
-</head>
-<body>
-    <h6 id=\"start-of-page\">Documentation powered by <a href=\"https://github.com/noc-lang/nocdoc\">nocdoc</a></h1>
-    <h2>{} : {}</h2>
-    <div>
-        <a id=\"top-btn\" href=\"#start-of-page\">Top</a>
-
-        <div id=\"container\">
-
-            <div id=\"sidebar\">
-                <ul id=\"table-of-contents\">
-                <h3 class=\"section-title\">Table of contents</h6>
-                {}
-                <li class=\"more-link\" id=\"btn-1\">
-                    <label for=\"check-1\">more</label>
-                    <input type=\"checkbox\" id=\"check-1\" />
-                </li>
-                </ul>
-
-                <ul id=\"sidebar2\">
-                {}
-                <li class=\"more-link\" id=\"btn-2\">
-                    <label for=\"check-2\">more</label>
-                    <input type=\"checkbox\" id=\"check-2\" />
-                </li>
-                </ul>
-            </div>
-            
-            <div id=\"docs\"> 
-            {}
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function toggleMenu(button, menu, checkbox) {
-            button.addEventListener(\"click\", () => {
-                for(let i = 3; i < menu.length-1; i++) {
-                    if(checkbox.checked) {
-                        menu[i].style.display = \"block\";
-                    } else {
-                        menu[i].style.display = \"none\";
-                    }
-                }
-            });
-        }
-    
-        let buttons = document.querySelectorAll(\".more-link\");
-        let menu1 = document.querySelectorAll(\"#table-of-contents li\");
-        let menu2 = document.querySelectorAll(\"#sidebar2 li\");
-        let checkboxes = document.querySelectorAll(\"input[type=checkbox]\");
-
-        toggleMenu(buttons[0], menu1, checkboxes[0]);
-        toggleMenu(buttons[1], menu2, checkboxes[1]);
-    </script>
-</body>
-</html>
-    " swap format
-}
-
-def generateModule = {
-    3 -1 rotNM unquote
-    5 -1 rotNM pop
-    4 -1 rotNM pop
-    3 -1 rotNM pop
-    swap pop
-
-    header
-
-    swap dup ".html" cat
+    # "name.html" "name" "table_of_contents_html" "author" "desc" "url_git" 
     4 1 rotNM
 
-    # Output all docstring functions
-    3 -1 rotNM dup htmlFunctions
+    # "name.html" "name" "table_of_contents_html" "desc" "author" "url_git" ["url_git"]
+    3 -1 rotNM swap dup quote
 
-    swap nameFunctions "<h3 class=\"section-title\">Functions</h3>" swap cat swap 
+    # "name.html" "name" "table_of_contents_html" "desc" ["author" "url_git" "url_git"]
+    quoteTwoElems quoteTwoElems
 
-    4 -1 rotNM
-    3 1 rotNM 
+    # "name.html" "name" "table_of_contents_html" "desc" "sidebar2_html" 
+    DETAILS_SIDEBAR formatHTML
 
-    # type of page printed in the html
-    "module"
+    # "name.html" "name" "table_of_contents_html" "sidebar2_html" "desc"
+    swap
 
-    html write
+    # "name.html" "table_of_contents_html" "sidebar2_html" "desc" "library : name" "library : name"
+    4 -1 rotNM "library : " swap cat dup
+
+    # "name.html" "library : name" "library : name" "table_of_contents_html" "sidebar2_html" "desc"
+    5 2 rotNM
+
+    # "name.html" "html_content"
+    PAGE formatHTML
+}
+
+def renderModule = {
+    ---
+    renderModule : info functions "module_name" => "module_name.html" "html_content"
+        info -> ["name" "author" "desc" "url_git" table_of_contents] => "html_content"
+        functions -> [[func_a] [func_b] ...]
+    Render the Noc module in HTML format string
+    ---
+
+    # functions "module_name" "name" "author" "desc" "url_git" table_of_contents
+    3 -1 rotNM unquote
+
+    # functions "module_name" "table_of_contents_html"
+    TABLE_OF_CONTENTS_SIDEBAR formatHTML
+
+    # functions "module_name" "table_of_contents_html"
+    swap pop
+    swap pop
+    swap pop
+    swap pop
+
+    # "module_name" "table_of_contents_html" functions functions
+    3 -1 rotNM dup
+
+    # "module_name" "table_of_contents_html" functions "functions_html"
+    NOC_FUNCTIONS_DOCUMENTATION formatHTML
+
+    # "module_name" "table_of_contents_html" "functions_sidebar" "functions_html" 
+    swap FUNCTIONS_SIDEBAR formatHTML swap
+
+    # "module_name.html" "module_name" table_of_contents_html" "functions_sidebar" "functions_html" 
+    4 -1 rotNM dup ".html" cat swap 5 2 rotNM
+
+    # "module_name.html" table_of_contents_html" "functions_sidebar" "functions_html" "module : module_name" "module : module_name"
+    4 -1 rotNM "module : " swap cat dup
+
+    # "module_name.html" "module : module_name" "module : module_name" table_of_contents_html" "functions_sidebar" "functions_html"
+    5 2 rotNM 
+
+    # "module_name.html" "html_content"
+    PAGE formatHTML
+}
+
+def renderWikiPage = {
+    ---
+    renderModule : wikiInfo wikiPage "wiki_page_name" => "wiki_page_name.html" "html_content"
+        wikiInfo -> ["name" "author" "desc" "url_git" table_of_contents]
+        wikiPage -> content page in HTML
+    Render the Noc wiki in HTML format string
+    ---
+
+    # wikiPage "wiki_page_name" "name" "author" "desc" "url_git" table_of_contents
+    3 -1 rotNM unquote
+
+    # wikiPage "wiki_page_name" "name" "author" "url_git" table_of_contents
+    3 -1 rotNM pop
+
+    # wikiPage "wiki_page_name" "name" "author" "url_git" "table_of_contents_html"
+    TABLE_OF_CONTENTS_SIDEBAR formatHTML
+
+    # wikiPage "wiki_page_name" "name" "table_of_contents_html" "author" "url_git" ["url_git"] 
+    3 1 rotNM dup quote
+
+    # wikiPage "wiki_page_name" "name" "table_of_contents_html" ["author" "url_git" "url_git"]
+    quoteTwoElems quoteTwoElems
+
+    # wikiPage "wiki_page_name" "name" "table_of_contents_html" "sidebar2_html"
+    DETAILS_SIDEBAR formatHTML
+
+    # wikiPage "wiki_page_name" "table_of_contents_html" "sidebar2_html"
+    3 -1 rotNM pop
+
+    # "wiki_page_name.html" wikiPage "table_of_contents_html" "sidebar2_html" "wiki_page_name" 
+    3 -1 rotNM dup ".html" cat 5 1 rotNM
+    
+    # "wiki_page_name.html" wikiPage "table_of_contents_html" "sidebar2_html" "library : wiki_page_name" "library : wiki_page_name"
+    "library : " swap cat dup
+
+    # "wiki_page_name.html" wikiPage "library : wiki_page_name" "library : wiki_page_name" "table_of_contents_html" "sidebar2_html"
+    4 2 rotNM 
+
+    # "wiki_page_name.html" "library : wiki_page_name" "library : wiki_page_name" "table_of_contents_html" "sidebar2_html" wikiPage
+    5 -1 rotNM
+
+    # "wiki_page_name.html" "html_content"
+    PAGE formatHTML
 }
 
 def generateHomePage = {
-    # filename.html filename "table_of_contents" "details section" "description" "type_page"
-    # "wiki_name.html" "wiki_name" "toc" "details" "wiki_description in HTML..." 
-    unquote
-
-    header
-    
-    5 -1 rotNM dup 
-    ".html" cat swap
-    6 2 rotNM
-
-    4 1 rotNM
-
-    3 -1 rotNM swap
-
-    quote swap quote swap cat
-    detailsSection swap
-
-    # type of page printed in the html
-    "library"
-
-    html write
+    ---
+    generateHomePage : info => ()
+        info -> ["name" "author" "desc" "url_git" table_of_contents]
+    Generate the homepage in HTML format.
+    ---
+    renderHomePage write
 }
 
-def generateWikiPage = { 
-    dup ".html" cat swap
-    4 2 rotNM
-    
-    swap unquote
-    5 -1 rotNM pop
-    3 -1 rotNM pop
-    3 1 rotNM
 
-    quote swap quote swap cat
+def generateModule = {
+    ---
+    generateModule : info functions "module_name" -> ()
+        info -> ["name" "author" "desc" "url_git" table_of_contents]
+        functions -> [[func_a] [func_b] ...]
+    Generate a Noc module in HTML format
+    ---
+    renderModule write
+}
 
-    detailsSection swap
-
-    header 3 1 rotNM
-
-    3 -1 rotNM
-    3 1 rotNM
-    swap
-
-    # type of page printed in the html
-    "wiki"
-
-    html write
+def generateWikiPage = {
+    ---
+    generateWikis: wikiInfo wikiPage "wiki_page_name" -> ()
+        wikiInfo: ["name" "author" "desc" "url_git" table_of_contents]
+        wikiPage: content page in HTML
+    Generate a Noc wiki in HTML format
+    ---
+    renderWikiPage write
 }

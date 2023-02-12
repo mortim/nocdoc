@@ -1,0 +1,54 @@
+load std:bool
+load std:stack
+
+# Remove the last n characters in a character's list
+#   - it's used to remove the '.html' extension in a char list
+def removeNChars = {
+    # example => ['f' 'i' 'l' 'e' '.' 'h' 't' 'm' 'l'] nb_chars
+    dup
+    [
+        [[0] [  # ['f' 'i' 'l' 'e']
+                pop 
+             ]]
+        [[_] [  #  (nb_chars 1 -) ['f' 'i' 'l' 'e' '.' 'h' 't' 'm' 'l']
+                1 - swap 
+                # ['f' 'i' 'l' 'e' '.' 'h' 't' 'm'] (nb_chars-1) [removeNChars]
+                popr pop swap removeNChars
+             ]]
+    ] case
+}
+
+# Quote two elements : a [b] -> [a b]
+def quoteTwoElems = { 
+    swap quote swap cat
+}
+
+# Replace '\n' by the "<br>" HTML tag in a chars list
+def replaceNewlines = {
+    dup
+    [
+        [[[]] [ # ['d' 'o' 'c']
+                pop
+            ]]
+        [[_] [ # [] ['d' 'o'] 'c'
+               popr
+               # [] ['d' 'o'] 'c' 'c'
+               dup
+               # [] ['d' 'o'] 'c' 'c' [...] [...]
+               [quote 3 -1 rotNM cat swap replaceNewlines]
+               [pop ['<' 'b' 'r' '>'] 3 -1 rotNM cat swap replaceNewlines]
+               # [] ['d' 'o'] 'c' [...] [...] 'c' '\n' (==)
+               3 -1 rotNM '\n' ==
+               # [] ['d' 'o'] 'c' [...] [...] (True | False)
+               if
+               # if True
+               #   -> [pop ['<' 'b' 'r' '>'] 3 -1 rotNM cat swap replaceNewlines]
+               #   -> ['d' 'o'] ['<' 'b' 'r' '>'] (['<' 'b' 'r' '>'] 3 -1 rotNM cat)
+               #   -> ['<' 'b' 'r' '>'] ['d' 'o'] (replaceNewlines)
+               # else
+               #    -> [quote 3 -1 rotNM cat swap replaceNewlines]
+               #    -> ['d' 'o'] ['c'] (quote 3 -1 rotNM cat)
+               #    -> ['c'] ['d' 'o'] (replaceNewlines)
+        ]]
+    ] case
+}
