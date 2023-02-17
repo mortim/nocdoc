@@ -106,39 +106,39 @@ def formatHTML = {
 def renderHomePage = {
     ---
     renderHomePage : info => "name.html" "html_content"
-        info -> ["name" "author" "desc" "url_git" table_of_contents]
+        info -> ["name" "author" [desc] "url_git" table_of_contents]
     Render the homepage in HTML format string
     ---
 
-    # "name" "author" "desc" "url_git" table_of_contents
+    # "name" "author" [desc] "url_git" table_of_contents
     unquote
 
-    # "name" "author" "desc" "url_git" "table_of_contents_html"
+    # "name" "author" [desc] "url_git" "table_of_contents_html"
     TABLE_OF_CONTENTS_SIDEBAR formatHTML
 
-    # "author" "desc" "url_git" "table_of_contents_html" "name" "name"
+    # "author" [desc] "url_git" "table_of_contents_html" "name" "name"
     5 -1 rotNM dup
 
-    # "author" "desc" "url_git" "table_of_contents_html" "name.html" "name"
+    # "author" [desc] "url_git" "table_of_contents_html" "name.html" "name"
     ".html" cat swap 
 
-    # "name.html" "name" "author" "desc" "url_git" "table_of_contents_html"
+    # "name.html" "name" "author" [desc] "url_git" "table_of_contents_html"
     6 2 rotNM 
 
-    # "name.html" "name" "table_of_contents_html" "author" "desc" "url_git" 
+    # "name.html" "name" "table_of_contents_html" "author" [desc] "url_git" 
     4 1 rotNM
 
-    # "name.html" "name" "table_of_contents_html" "desc" "author" "url_git" ["url_git"]
+    # "name.html" "name" "table_of_contents_html" [desc] "author" "url_git" ["url_git"]
     3 -1 rotNM swap dup quote
 
-    # "name.html" "name" "table_of_contents_html" "desc" ["author" "url_git" "url_git"]
+    # "name.html" "name" "table_of_contents_html" [desc] ["author" "url_git" "url_git"]
     quoteTwoElems quoteTwoElems
 
-    # "name.html" "name" "table_of_contents_html" "desc" "sidebar2_html" 
+    # "name.html" "name" "table_of_contents_html" [desc] "sidebar2_html" 
     DETAILS_SIDEBAR formatHTML
 
     # "name.html" "name" "table_of_contents_html" "sidebar2_html" "desc"
-    swap
+    swap unquote
 
     # "name.html" "table_of_contents_html" "sidebar2_html" "desc" "library : name" "library : name"
     4 -1 rotNM "library : " swap cat dup
@@ -153,12 +153,12 @@ def renderHomePage = {
 def renderModule = {
     ---
     renderModule : info functions "module_name" => "module_name.html" "html_content"
-        info -> ["name" "author" "desc" "url_git" table_of_contents] => "html_content"
+        info -> ["name" "author" [desc] "url_git" table_of_contents] => "html_content"
         functions -> [[func_a] [func_b] ...]
     Render the Noc module in HTML format string
     ---
 
-    # functions "module_name" "name" "author" "desc" "url_git" table_of_contents
+    # functions "module_name" "name" "author" [desc] "url_git" table_of_contents
     3 -1 rotNM unquote
 
     # functions "module_name" "table_of_contents_html"
@@ -240,7 +240,7 @@ def renderWikiPage = {
 def generateHomePage = {
     ---
     generateHomePage : info => ()
-        info -> ["name" "author" "desc" "url_git" table_of_contents]
+        info -> ["name" "author" [desc] "url_git" table_of_contents]
     Generate the homepage in HTML format.
     ---
     renderHomePage write
@@ -250,7 +250,7 @@ def generateHomePage = {
 def generateModule = {
     ---
     generateModule : info functions "module_name" -> ()
-        info -> ["name" "author" "desc" "url_git" table_of_contents]
+        info -> ["name" "author" [desc] "url_git" table_of_contents]
         functions -> [[func_a] [func_b] ...]
     Generate a Noc module in HTML format
     ---

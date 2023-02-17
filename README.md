@@ -41,7 +41,8 @@ def libInfo = {
     [
         "library_name"
         "author"
-        "library_description in HTML..."
+        /* or load std:fs and ["file_desc" read] */
+        ["library_description in HTML..."]
         "git repos url"
         /* Table of contents */
         [
@@ -60,7 +61,8 @@ def wikiInfo = {
     [
         "wiki_name"
         "author"
-        "wiki_description in HTML..."
+        /* or load std:fs and ["file_desc" read] */
+        ["wiki_description in HTML..."]
         "git repos url"
         /* Table of contents */
         [
