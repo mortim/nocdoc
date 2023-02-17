@@ -6,6 +6,12 @@ A basic documentation generator for the [Noc language programming language](http
 
 or if you want to document your own Noc functions:
 
+```
+git clone https://github.com/noc-lang/nocdoc
+```
+
+then you have to create a Noc file out of the nocdoc repos:
+
 ```scala
 load nocdoc/nocdoc.noc
 
