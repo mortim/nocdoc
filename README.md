@@ -53,7 +53,7 @@ def libInfo = {
         /* Table of contents */
         [
             [ "overview"
-              [ "index.html"
+              [ "library_name.html"
                 "wiki_name.html" ]]
 
             [ "modules"
@@ -73,7 +73,7 @@ def wikiInfo = {
         /* Table of contents */
         [
             [ "overview"
-              [ "index.html"
+              [ "library_name.html"
                 "wiki_name.html" ]]
         
             [ "wiki"
