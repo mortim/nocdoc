@@ -8,7 +8,7 @@ load nocdoc/include/constants.noc
 
 def formatHTML = {
     ---
-    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#L9">github.com/noc-lang/nocdoc/nocdoc.noc#formatHTML</a>
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#L9">nocdoc/nocdoc.noc#formatHTML</a>
 
     Format some website blocks in HTML
 
@@ -106,7 +106,7 @@ def formatHTML = {
 
 def renderHomePage = {
     ---
-    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#L108">github.com/noc-lang/nocdoc/nocdoc.noc#renderHomePage</a>
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#L107">nocdoc/nocdoc.noc#renderHomePage</a>
 
     Render the homepage in HTML format string
 
@@ -156,7 +156,7 @@ def renderHomePage = {
 
 def renderModule = {
     ---
-    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#L158">github.com/noc-lang/nocdoc/nocdoc.noc#renderModule</a>
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#L157">nocdoc/nocdoc.noc#renderModule</a>
 
     Render the Noc module in HTML format string
 
@@ -201,7 +201,7 @@ def renderModule = {
 
 def renderWikiPage = {
     ---
-    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#L203">github.com/noc-lang/nocdoc/nocdoc.noc#renderWikiPage</a>
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#L202">nocdoc/nocdoc.noc#renderWikiPage</a>
 
     Render the Noc wiki in HTML format string
 
@@ -249,7 +249,7 @@ def renderWikiPage = {
 
 def generateHomePage = {
     ---
-    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#L251">github.com/noc-lang/nocdoc/nocdoc.noc#generateHomePage</a>
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#L250">nocdoc/nocdoc.noc#generateHomePage</a>
 
     Generate the homepage file in HTML format.
 
@@ -262,7 +262,7 @@ def generateHomePage = {
 
 def generateModule = {
     ---
-    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#L264">github.com/noc-lang/nocdoc/nocdoc.noc#generateModule</a>
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#L263">nocdoc/nocdoc.noc#generateModule</a>
 
     Generate a Noc module file in HTML format
 
@@ -275,7 +275,7 @@ def generateModule = {
 
 def generateWikiPage = {
     ---
-    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#277">github.com/noc-lang/nocdoc/nocdoc.noc#generateWikiPage</a>
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/nocdoc.noc#L276">nocdoc/nocdoc.noc#generateWikiPage</a>
 
     Generate a Noc wiki in HTML format
 

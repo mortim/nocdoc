@@ -1,6 +1,6 @@
 def TABLE_OF_CONTENTS_SIDEBAR = {
     ---
-    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L1">github.com/noc-lang/nocdoc/constants.noc#TABLE_OF_CONTENTS_SIDEBAR</a>
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L1">nocdoc/include/constants.noc#TABLE_OF_CONTENTS_SIDEBAR</a>
 
     Render the table of contents in HTML (see <a href="page-rendering.html#[formatHTML]">formatHTML</a>)
     ---
@@ -9,7 +9,7 @@ def TABLE_OF_CONTENTS_SIDEBAR = {
 
 def TABLE_OF_CONTENTS_LINKS = { 
     ---
-    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L10">github.com/noc-lang/nocdoc/constants.noc#TABLE_OF_CONTENTS_LINKS</a>
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L10">nocdoc/include/constants.noc#TABLE_OF_CONTENTS_LINKS</a>
 
     Render the links for the table of contents in HTML (see <a href="page-rendering.html#[formatHTML]">formatHTML</a>)
     ---
@@ -18,7 +18,7 @@ def TABLE_OF_CONTENTS_LINKS = {
 
 def DETAILS_SIDEBAR = {
     ---
-    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L19">github.com/noc-lang/nocdoc/constants.noc#DETAILS_SIDEBAR</a>
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L19">nocdoc/include/constants.noc#DETAILS_SIDEBAR</a>
 
     Render the details sidebar (author, url_git_repos) in HTML (see <a href="page-rendering.html#[formatHTML]">formatHTML</a>)
     ---
@@ -27,7 +27,7 @@ def DETAILS_SIDEBAR = {
 
 def FUNCTIONS_SIDEBAR = { 
     ---
-    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L28">github.com/noc-lang/nocdoc/constants.noc#FUNCTIONS_SIDEBAR</a>
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L28">nocdoc/include/constants.noc#FUNCTIONS_SIDEBAR</a>
 
     Render the summary of all Noc functions from a module in HTML (see <a href="page-rendering.html#[formatHTML]">formatHTML</a>)
     ---
@@ -36,7 +36,7 @@ def FUNCTIONS_SIDEBAR = {
 
 def NOC_FUNCTIONS_DOCUMENTATION = { 
     ---
-    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L37">github.com/noc-lang/nocdoc/constants.noc#NOC_FUNCTIONS_DOCUMENTATION</a>
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L37">nocdoc/include/constants.noc#NOC_FUNCTIONS_DOCUMENTATION</a>
 
     Render the Noc functions documentation in HTML (see <a href="page-rendering.html#[formatHTML]">formatHTML</a>)
     ---
@@ -45,7 +45,7 @@ def NOC_FUNCTIONS_DOCUMENTATION = {
 
 def PAGE = { 
     ---
-    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L46">github.com/noc-lang/nocdoc/constants.noc#PAGE</a>
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L46">nocdoc/include/constants.noc#PAGE</a>
 
     Render the entire HTML page (see <a href="page-rendering.html#[formatHTML]">formatHTML</a>)
     ---
