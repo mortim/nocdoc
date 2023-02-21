@@ -24,7 +24,7 @@ def quoteTwoElems = {
 }
 
 # Replace '\n' by the "<br>" HTML tag in a chars list
-def replaceNewlines = {
+def replaceNewLines = {
     dup
     [
         [[[]] [ # ['d' 'o' 'c']
@@ -35,20 +35,20 @@ def replaceNewlines = {
                # [] ['d' 'o'] 'c' 'c'
                dup
                # [] ['d' 'o'] 'c' 'c' [...] [...]
-               [quote 3 -1 rotNM cat swap replaceNewlines]
-               [pop ['<' 'b' 'r' '>'] 3 -1 rotNM cat swap replaceNewlines]
+               [quote 3 -1 rotNM cat swap replaceNewLines]
+               [pop ['<' 'b' 'r' '>'] 3 -1 rotNM cat swap replaceNewLines]
                # [] ['d' 'o'] 'c' [...] [...] 'c' '\n' (==)
                3 -1 rotNM '\n' ==
                # [] ['d' 'o'] 'c' [...] [...] (True | False)
                if
                # if True
-               #   -> [pop ['<' 'b' 'r' '>'] 3 -1 rotNM cat swap replaceNewlines]
+               #   -> [pop ['<' 'b' 'r' '>'] 3 -1 rotNM cat swap replaceNewLines]
                #   -> ['d' 'o'] ['<' 'b' 'r' '>'] (['<' 'b' 'r' '>'] 3 -1 rotNM cat)
-               #   -> ['<' 'b' 'r' '>'] ['d' 'o'] (replaceNewlines)
+               #   -> ['<' 'b' 'r' '>'] ['d' 'o'] (replaceNewLines)
                # else
-               #    -> [quote 3 -1 rotNM cat swap replaceNewlines]
+               #    -> [quote 3 -1 rotNM cat swap replaceNewLines]
                #    -> ['d' 'o'] ['c'] (quote 3 -1 rotNM cat)
-               #    -> ['c'] ['d' 'o'] (replaceNewlines)
+               #    -> ['c'] ['d' 'o'] (replaceNewLines)
         ]]
     ] case
 }
