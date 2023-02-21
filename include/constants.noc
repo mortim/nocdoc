@@ -1,42 +1,53 @@
 def TABLE_OF_CONTENTS_SIDEBAR = {
     ---
-    TABLE_OF_CONTENTS_SIDEBAR constant (see <a href="main.html#[formatHTML]">formatHTML</a>)
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L1">github.com/noc-lang/nocdoc/constants.noc#TABLE_OF_CONTENTS_SIDEBAR</a>
+
+    Render the table of contents in HTML (see <a href="page-rendering.html#[formatHTML]">formatHTML</a>)
     ---
     0 
 }
 
 def TABLE_OF_CONTENTS_LINKS = { 
     ---
-    TABLE_OF_CONTENTS_LINKS constant (see <a href="main.html#[formatHTML]">formatHTML</a>)
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L10">github.com/noc-lang/nocdoc/constants.noc#TABLE_OF_CONTENTS_LINKS</a>
+
+    Render the links for the table of contents in HTML (see <a href="page-rendering.html#[formatHTML]">formatHTML</a>)
     ---
     1
 }
 
 def DETAILS_SIDEBAR = {
     ---
-    DETAILS_SIDEBAR constant (see <a href="main.html#[formatHTML]">formatHTML</a>)
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L19">github.com/noc-lang/nocdoc/constants.noc#DETAILS_SIDEBAR</a>
+
+    Render the details sidebar (author, url_git_repos) in HTML (see <a href="page-rendering.html#[formatHTML]">formatHTML</a>)
     ---
     2 
 }
 
 def FUNCTIONS_SIDEBAR = { 
     ---
-    FUNCTIONS_SIDEBAR constant (see <a href="main.html#[formatHTML]">formatHTML</a>)
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L28">github.com/noc-lang/nocdoc/constants.noc#FUNCTIONS_SIDEBAR</a>
+
+    Render the summary of all Noc functions from a module in HTML (see <a href="page-rendering.html#[formatHTML]">formatHTML</a>)
     ---
     3 
 }
 
-
 def NOC_FUNCTIONS_DOCUMENTATION = { 
     ---
-    NOC_FUNCTIONS_DOCUMENTATION (see <a href="main.html#[formatHTML]">formatHTML</a>)
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L37">github.com/noc-lang/nocdoc/constants.noc#NOC_FUNCTIONS_DOCUMENTATION</a>
+
+    Render the Noc functions documentation in HTML (see <a href="page-rendering.html#[formatHTML]">formatHTML</a>)
     ---
     4 
 }
 
 def PAGE = { 
     ---
-    PAGE constant (see <a href="main.html#[formatHTML]">formatHTML</a>)
+    source: <a href="https://github.com/noc-lang/nocdoc/blob/main/include/constants.noc#L46">github.com/noc-lang/nocdoc/constants.noc#PAGE</a>
+
+    Render the entire HTML page (see <a href="page-rendering.html#[formatHTML]">formatHTML</a>)
     ---
     5 
 }
