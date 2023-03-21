@@ -4,7 +4,7 @@ def TABLE_OF_CONTENTS_SIDEBAR = {
 
     Render the table of contents in HTML (see <a href="page-rendering.html#[formatHTML]">formatHTML</a>)
     ---
-    0 
+    0
 }
 
 def TABLE_OF_CONTENTS_LINKS = { 

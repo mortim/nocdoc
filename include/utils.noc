@@ -1,5 +1,6 @@
 load std:bool
 load std:stack
+load seq
 
 # Remove the last n characters in a character's list
 #   - it's used to remove the '.html' extension in a char list
