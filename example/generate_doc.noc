@@ -1,0 +1,28 @@
+load nocdoc/nocdoc.noc
+load nocdoc/example/library/config.noc
+load nocdoc/example/wiki/config.noc
+load seq
+load std:stack
+load std:io
+load sys
+
+def putVerbose = {
+    "-> '{}' \x1b[32mbuilt\x1b[0m\n\n" swap quote format putstr
+}
+
+def main = {
+    args
+    [
+        [[["wiki"]] [ wikiInfo generateHomePage
+                      "wiki-homepage" putVerbose 
+                      "Building wiki pages..." putstrln
+                      wikiPageContents [wikiInfo swap unquote dup putVerbose generateWikiPage] step ]]
+
+        [[["library"]] [ libraryInfo generateHomePage
+                         "library-homepage" putVerbose
+                         libraryInfo moduleFunctions "random" generateModule
+                         "random-module" putVerbose ]]
+
+        [[_] ["noc: no such argument\n" putstr 1 exit]]
+    ] case
+}

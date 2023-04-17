@@ -1,0 +1,38 @@
+load nocdoc/nocdoc.noc
+load std:fs
+
+/* IMPORTANT: You have to keep the same order */
+def wikiInfo = {
+    [
+        "wiki"
+        "author"
+        /* or load std:fs and ["file_desc" read] */
+        ["<h2>An example of wiki</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet neque id lacus imperdiet finibus at ut purus. Duis imperdiet ullamcorper consequat. Integer porta a lectus quis sodales. Sed magna tortor, euismod id purus eget, eleifend consectetur eros. Ut dolor dolor, commodo at tincidunt sed, scelerisque a nunc. In eget leo sagittis, dignissim lectus ut, semper nisi. Donec tellus nisl, rhoncus ac consectetur ut, fringilla ac dolor. Mauris tempor, ante vel varius dapibus, libero nunc posuere nunc, ac elementum odio lacus sit amet elit. Mauris elit ligula, laoreet in est at, ultricies cursus quam.</p>"]
+        "https://github.com/author/section"
+        /* Table of contents */
+        [
+            [ "overview"
+              [ "wiki.html"
+                "library.html" ]]
+
+            [ "Segment 1"
+              [ "content-1.html"
+                "content-2.html" ]]
+
+            [ "Segment 2"
+              [ "content-3.html"
+                "content-4.html" ]]
+        ]
+    ]
+}
+
+def wikiPageContents = {
+    [   # Segment 1
+        ["nocdoc/example/wiki/content/segment-1/content1.html" read "content-1"] 
+        ["nocdoc/example/wiki/content/segment-1/content2.html" read "content-2"] 
+        # Segment 2
+        ["nocdoc/example/wiki/content/segment-2/content3.html" read "content-3"] 
+        ["nocdoc/example/wiki/content/segment-2/content4.html" read "content-4"] 
+    ]
+}

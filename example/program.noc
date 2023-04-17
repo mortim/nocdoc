@@ -1,0 +1,11 @@
+def randomFunction1 = {
+    ---
+    Some doc...
+    ---
+}
+
+def randomFunction2 = {
+    ---
+    Some doc...
+    ---
+}

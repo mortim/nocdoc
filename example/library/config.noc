@@ -1,0 +1,31 @@
+load nocdoc/nocdoc.noc
+load nocdoc/example/program.noc
+load std:fs
+
+/* IMPORTANT: You have to keep the same order */
+def libraryInfo = {
+    [
+        "library"
+        "author"
+        /* or load std:fs and ["file_desc" read] */
+        ["<h2>An example of library</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet neque id lacus imperdiet finibus at ut purus. Duis imperdiet ullamcorper consequat. Integer porta a lectus quis sodales. Sed magna tortor, euismod id purus eget, eleifend consectetur eros. Ut dolor dolor, commodo at tincidunt sed, scelerisque a nunc. In eget leo sagittis, dignissim lectus ut, semper nisi. Donec tellus nisl, rhoncus ac consectetur ut, fringilla ac dolor. Mauris tempor, ante vel varius dapibus, libero nunc posuere nunc, ac elementum odio lacus sit amet elit. Mauris elit ligula, laoreet in est at, ultricies cursus quam.</p>"]
+        "https://github.com/author/section"
+        /* Table of contents */
+        [
+            [ "overview"
+              [ "library.html"
+                "wiki.html" ]]
+
+            [ "modules"
+              [ "random.html" ]]
+        ]
+    ]
+}
+
+def moduleFunctions = {
+  [
+    [randomFunction1]
+    [randomFunction2]
+  ]
+}
