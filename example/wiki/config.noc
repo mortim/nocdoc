@@ -12,7 +12,7 @@ def wikiInfo = {
         "https://github.com/author/section"
         /* Table of contents */
         [
-            [ "overview"
+            [ "Overview"
               [ "wiki.html"
                 "library.html" ]]
 

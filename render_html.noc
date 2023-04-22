@@ -83,6 +83,12 @@ def formatHTML = {
                 # "acc<div id=\"#[func_a]\"><h3>[func_a]</h3>func_a_doc_with_br_tags</div>"
                 cat
             ] fold
+
+            # ["noc_functions_html"]
+            quote
+
+            # "<div id=\"functions\">noc_functions_html</div>"
+            "<div id=\"functions\">{}</div>" swap format
         ]]
 
         [[FUNCTIONS_SIDEBAR] [
