@@ -17,7 +17,7 @@ def libraryInfo = {
               [ "library.html"
                 "wiki.html" ]]
 
-            [ "modules"
+            [ "Modules"
               [ "random.html" ]]
         ]
     ]
